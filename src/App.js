@@ -22,6 +22,8 @@ function App() {
     if (name.firstName && name.lastName) {
       // Combine first name and last name to form full name
       setFullName(`${name.firstName} ${name.lastName}`);
+      // Clear the first name and last name fields
+      setName({ firstName: "", lastName: "" });
     }
   }
 
@@ -66,3 +68,4 @@ function App() {
 }
 
 export default App;
+
