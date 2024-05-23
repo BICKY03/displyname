@@ -1,69 +1,48 @@
-import React, { useState } from 'react';
-import './App.css';
+import "./index.css";
+import { useState } from "react";
 
-function App() {
-  // State variables for first name, last name, and full name
-  const [name, setName] = useState({ firstName: "", lastName: "" });
-  const [fullName, setFullName] = useState('');
+export default function App() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [hasFullName, sethasFullName] = useState(false);
 
-  // Function to handle changes in input fields
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setName(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  }
-
-  // Function to handle form submission
-  function handleSubmit(event) {
-    event.preventDefault();
-    // Check if both first name and last name are provided
-    if (name.firstName && name.lastName) {
-      // Combine first name and last name to form full name
-      setFullName(`${name.firstName} ${name.lastName}`);
-    }
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFullName(`${firstName} ${lastName}`);
+    sethasFullName(true);
+  };
 
   return (
     <div className="App">
-      {/* Form to input first name and last name */}
+      <h1>Full Name Display</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Enter your firstName:
-          {/* Input field for first name */}
+        <div>
+          <label htmlFor="fname">First Name:</label>
           <input
             type="text"
-            name="firstName"
-            value={name.firstName}
-            placeholder="Enter your firstName"
-            onChange={handleChange}
+            id="fname"
             required
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
           />
-        </label>
-        <br />
-        <label>
-          Enter your lastName:
-          {/* Input field for last name */}
+        </div>
+        <div>
+          <label htmlFor="fname">Last Name:</label>
           <input
             type="text"
-            name="lastName"
-            value={name.lastName}
-            placeholder="Enter your lastName"
-            onChange={handleChange}
+            id="lname"
             required
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
-        </label>
-        <br />
-        {/* Button to submit the form */}
+        </div>
         <button type="submit">Submit</button>
       </form>
-      
-      {/* Display full name if it exists */}
-      {fullName && <p>Your full name is: {fullName}</p>}
+      {hasFullName && <p>Full Name: {fullName}</p>}
     </div>
   );
 }
 
-export default App; 
+
 
